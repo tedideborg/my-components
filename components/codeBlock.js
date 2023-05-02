@@ -4,8 +4,8 @@ const codeBlock = (data) => {
     return html`
         <section>
             <hgroup>
-                <h1>${data.title}</h1>
-                <h2>${data.desc}</h2>
+                <h3>${data.title}</h3>
+                <h4>${data.desc}</h4>
             </hgroup>
 
             ${data.code.map((code) => {
