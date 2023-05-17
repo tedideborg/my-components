@@ -14,7 +14,7 @@ const codeBlock = (data) => {
                         <summary>${code.type}</summary>
                         <pre>
 							<code>
-								${code.code}
+								${hljs.highlightAuto(code.code).value}
 							</code>
 						</pre>
                     </details>

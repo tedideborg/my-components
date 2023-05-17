@@ -6,19 +6,15 @@ export const web = [
             {
                 type: 'HTML',
                 code: `
-					&lt;body&gt;
-						&lt;main class=&quot;container&quot;&gt;
-						&lt;h1&gt;Hello, world!&lt;/h1&gt;
-						&lt;/main&gt;
-					&lt;/body&gt;
+<h1>Hello World</h1>
 				`,
             },
             {
                 type: 'CSS',
                 code: `
-					pre {
-						color: blue
-					}
+pre {
+	color: blue
+}
 				`,
             },
         ],

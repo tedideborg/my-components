@@ -6,7 +6,7 @@ export const games = [
             {
                 type: 'Javascript',
                 code: `
-					const hej = "hejsan"
+const hej = "hejsan"
 				`,
             },
         ],
