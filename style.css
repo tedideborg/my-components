@@ -1,3 +1,7 @@
 pre {
     background: #333;
 }
+
+.active {
+    --background-color: var(--primary-focus);
+}

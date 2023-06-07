@@ -1,6 +1,6 @@
-import { html } from 'https://esm.sh/@arrow-js/core';
+import html from 'solidjs-html';
 
-const homePage = () => {
+export default function homePage() {
     return html`
         <div class="container">
             <article>
@@ -12,6 +12,4 @@ const homePage = () => {
             </article>
         </div>
     `;
-};
-
-export default homePage;
+}

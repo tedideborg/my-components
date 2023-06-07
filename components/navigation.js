@@ -1,24 +1,45 @@
-import { reactive, html } from 'https://esm.sh/@arrow-js/core';
+import { For, onMount } from 'solidjs';
+import html from 'solidjs-html';
 
-const navigaiton = (currentPage) => {
+/**
+ * The navigation
+ * @param {string} currentPage Which page it is to highlight
+ * @param {Array} pages An array of strings with the pages it should render
+ * @returns {string}
+ */
+export default function navigaiton(currentPage, pages = ['home', 'web']) {
+    onMount(() => {
+        console.log('nav mounted');
+    });
+
     return html`
         <nav>
             <ul>
                 <li>
-                    <a href="/" data-navigo>Home</a>
+                    <a
+                        class=${currentPage === 'home' ? 'active' : ''}
+                        href="/"
+                        data-navigo
+                        >Home</a
+                    >
                 </li>
-                <li>
-                    <a href="/web" data-navigo>Web</a>
-                </li>
-                <li>
-                    <a href="/game" data-navigo>Game</a>
-                </li>
-                <li>
-                    <a href="/templates" data-navigo>Templates</a>
-                </li>
+                <${For} each=${pages}>
+                    ${(page) => {
+                        return html`
+                            <li>
+                                <a
+                                    class=${currentPage === page
+                                        ? 'active'
+                                        : ''}
+                                    href=${page}
+                                    data-navigo
+                                    >${page}</a
+                                >
+                            </li>
+                        `;
+                    }}
+                <//>
             </ul>
         </nav>
     `;
-};
-
-export default navigaiton;
+}

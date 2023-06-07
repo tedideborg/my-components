@@ -1,57 +1,73 @@
-import { reactive, html } from 'https://esm.sh/@arrow-js/core';
+import {
+    createEffect,
+    createResource,
+    createSignal,
+    Switch,
+    Match,
+    onMount,
+} from 'solidjs';
+import html from 'solidjs-html';
+import { render } from 'solidjs-web';
 import navigation from './components/navigation.js';
-import webPage from './pages/webPage.js';
+import codePage from './pages/codePage.js';
 import homePage from './pages/homePage.js';
-import gamePage from './pages/gamePage.js';
-import templatesPage from './pages/templatesPage.js';
 
-const data = reactive({
-    currentPage: 'home',
-});
+export const rootUrl =
+    'https://api.github.com/repos/tedideborg/my-components/contents/data/';
 
-html`
-    <header>
-        <hgroup>
-            <h1>My components</h1>
-            <h2>
-                A collection of my components I've built throughout the years
-            </h2>
-        </hgroup>
-        ${() => navigation(data.currentPage)}
-    </header>
-    <main>
-        ${() => {
-            switch (data.currentPage) {
-                case 'web':
-                    console.log('hej');
-                    return webPage();
-                case 'home':
-                    return homePage();
-                case 'game':
-                    console.log('hej');
-                    return gamePage();
-                case 'templates':
-                    return templatesPage();
-                default:
-                    break;
-            }
-        }}
-    </main>
-    <footer>Made with Love by Ted</footer>
-`(document.getElementById('app'));
+const [page, setPage] = createSignal('home');
 
-const router = new Navigo('/', { hash: true });
-router
-    .on('/', () => {
-        data.currentPage = 'home';
-    })
-    .on('/web', () => {
-        data.currentPage = 'web';
-    })
-    .on('/game', () => {
-        data.currentPage = 'game';
-    })
-    .on('/templates', () => {
-        data.currentPage = 'templates';
-    })
-    .resolve();
+function App() {
+    const [pages] = createResource(setupNavigation);
+
+    createEffect(() => {
+        if (pages.loading) return;
+        initialiseRouter();
+    }, [pages]);
+
+    return html`
+        <header>
+            <hgroup>
+                <h1>My components</h1>
+                <h2>
+                    A collection of my components I've built throughout the
+                    years
+                </h2>
+            </hgroup>
+        </header>
+        ${() => navigation(page(), pages)}
+        <main>
+            <${Switch}>
+                <${Match} when=${() => page() === 'home'}> ${homePage()} <//>
+                <${Match} when=${() => page() !== 'home'}>
+                    ${codePage(page())}
+                <//>
+            <//>
+        </main>
+        <footer>Made with Love by Ted</footer>
+    `;
+}
+
+render(App, document.getElementById('app'));
+
+async function setupNavigation() {
+    let res = await fetch(rootUrl);
+    let data = await res.json();
+    console.log(data);
+    let dirs = data
+        .filter((item) => item.type === 'dir')
+        .map((item) => item.name);
+    return dirs;
+}
+
+function initialiseRouter() {
+    const router = new Navigo('/', { hash: true });
+    router
+        .on('/', () => {
+            setPage('home');
+        })
+        .on('/:page', ({ data }) => {
+            setPage(data.page);
+        })
+        .resolve();
+}
