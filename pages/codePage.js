@@ -8,6 +8,7 @@ import { rootUrl } from '../app.js';
  * @returns html string of the site
  */
 export default function codePage(part) {
+    console.log(part);
     return html` <h1>${`${part} components`}</h1>
         ${componentsList(rootUrl + part)}`;
 }

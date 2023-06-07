@@ -40,7 +40,7 @@ function App() {
             <${Switch}>
                 <${Match} when=${() => page() === 'home'}> ${homePage()} <//>
                 <${Match} when=${() => page() !== 'home'}>
-                    ${codePage(page())}
+                    ${() => codePage(page())}
                 <//>
             <//>
         </main>
@@ -53,7 +53,6 @@ render(App, document.getElementById('app'));
 async function setupNavigation() {
     let res = await fetch(rootUrl);
     let data = await res.json();
-    console.log(data);
     let dirs = data
         .filter((item) => item.type === 'dir')
         .map((item) => item.name);
@@ -67,6 +66,7 @@ function initialiseRouter() {
             setPage('home');
         })
         .on('/:page', ({ data }) => {
+            console.log(data);
             setPage(data.page);
         })
         .resolve();
