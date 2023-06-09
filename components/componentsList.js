@@ -16,7 +16,7 @@ export default function componentsList(url) {
                 return html`
                     <article>
                         <h4>${dir.name}</h4>
-                        ${() => codeList(url + dir.name + '/')}
+                        ${codeList(`${url}/${dir.name}/`)}
                     </article>
                 `;
             }}

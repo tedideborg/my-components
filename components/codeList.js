@@ -14,7 +14,8 @@ export default function codeList(url) {
     return html`
         <${For} each=${() => code()}>
             ${(code) => {
-                return html` ${codeBlock()} `;
+                return html`<p>Hej</p>
+                    ${() => codeBlock(code)} `;
             }}
         <//>
     `;

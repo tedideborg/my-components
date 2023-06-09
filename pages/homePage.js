@@ -17,7 +17,7 @@ export default function homePage() {
                     I also built this website as a test for not using any build
                     tools (no webpack, npm or anything like that). I've used
                     SolidJs, Navigo and Pico css to build it. It's small, it's
-                    fast and it's extremely easy to get ut and running with it.
+                    fast and it's extremely easy to get up and running with it.
                 </p>
             </section>
         </div>

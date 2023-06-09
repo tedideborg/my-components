@@ -4,21 +4,21 @@ import CopyButton from './copyButton.js';
 
 /**
  * Renders a block of code
- * @param {string} url
+ * @param {string} path
  * @returns {Promise<string>} html string
  */
-export default function codeBlock(part) {
+export default function codeBlock({ path }) {
     const [url, setUrl] = createSignal('');
     const [code] = createResource(url, fetchCode);
 
     const parser = new DOMParser();
 
     return html`
-        <details onclick=${() => setUrl('./data/response_2.json')}>
+        <details onclick=${() => setUrl(path)}>
             <summary>Javascript</summary>
             <${Show}
                 when=${!code.isLoading}
-                fallback=${html`<p>loading...</p>`}
+                fallback=${html`<p aria-busy="true">loading...</p>`}
             >
                 ${CopyButton(() => code())}
                 <pre>
@@ -38,8 +38,11 @@ export default function codeBlock(part) {
 
 async function fetchCode(url) {
     if (!url) return;
+    console.log(url);
     const res = await fetch(url);
-    const data = await res.json();
-    const decoded = atob(data.content);
-    return decoded;
+    console.log(res);
+    const data = await res.text();
+    // console.log(data);
+    // const decoded = atob(data.content);
+    return data;
 }
