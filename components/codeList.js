@@ -8,7 +8,6 @@ import codeBlock from './codeBlock.js';
  * @returns {string} html string
  */
 export default function codeList(url) {
-    console.log(url);
     const [code] = createResource(() => getCode(url));
 
     return html`
@@ -24,6 +23,5 @@ export default function codeList(url) {
 async function getCode(url) {
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
     return data;
 }

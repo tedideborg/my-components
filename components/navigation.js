@@ -8,10 +8,6 @@ import html from 'solidjs-html';
  * @returns {string}
  */
 export default function navigaiton(currentPage, pages = ['home', 'web']) {
-    onMount(() => {
-        console.log('nav mounted');
-    });
-
     return html`
         <nav>
             <ul>

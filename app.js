@@ -1,10 +1,9 @@
 import {
+    Match,
+    Switch,
     createEffect,
     createResource,
     createSignal,
-    Switch,
-    Match,
-    onMount,
 } from 'solidjs';
 import html from 'solidjs-html';
 import { render } from 'solidjs-web';
@@ -66,7 +65,6 @@ function initialiseRouter() {
             setPage('home');
         })
         .on('/:page', ({ data }) => {
-            console.log(data);
             setPage(data.page);
         })
         .resolve();

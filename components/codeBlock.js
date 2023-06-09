@@ -4,7 +4,7 @@ import CopyButton from './copyButton.js';
 
 /**
  * Renders a block of code
- * @param {string} path
+ * @param {object} data
  * @returns {Promise<string>} html string
  */
 export default function codeBlock({ path }) {
@@ -38,11 +38,7 @@ export default function codeBlock({ path }) {
 
 async function fetchCode(url) {
     if (!url) return;
-    console.log(url);
     const res = await fetch(url);
-    console.log(res);
     const data = await res.text();
-    // console.log(data);
-    // const decoded = atob(data.content);
     return data;
 }
