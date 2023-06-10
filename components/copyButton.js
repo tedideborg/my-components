@@ -12,5 +12,7 @@ export default function copyButton(code) {
         navigator.clipboard.writeText(codeString);
     }
 
-    return html` <button onclick=${copyToClipboard}>Copy</button> `;
+    return html`
+        <button class="copyBtn" onclick=${copyToClipboard}>Copy code</button>
+    `;
 }

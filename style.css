@@ -5,3 +5,13 @@ pre {
 .active {
     --background-color: var(--primary-focus);
 }
+
+.copyBtn {
+    position: absolute;
+    right: 0;
+    width: auto;
+}
+
+.codeBlock {
+    position: relative;
+}

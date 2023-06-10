@@ -7,7 +7,7 @@ import html from 'solidjs-html';
  * @param {Array} pages An array of strings with the pages it should render
  * @returns {string}
  */
-export default function navigaiton(currentPage, pages = ['home', 'web']) {
+export default function navigaiton(currentPage, pages) {
     return html`
         <nav>
             <ul>
