@@ -3,7 +3,7 @@ import componentsList from '../components/componentsList.js';
 import { rootUrl } from '../app.js';
 
 /**
- *
+ * The page that contains all the code
  * @param {string} part The part of the url
  * @returns html string of the site
  */

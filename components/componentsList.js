@@ -5,7 +5,7 @@ import codeList from './codeList.js';
 /**
  * Renders out a list of the sub-folders of a specific folder on github
  * @param {string} url The url to the folder it should get the sub-folders from and it's names
- * @returns {string} html string
+ * @returns {Promise<string>} html string
  */
 export default function componentsList(url) {
     const [components] = createResource(() => getComponents(url));

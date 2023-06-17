@@ -5,7 +5,7 @@ import html from 'solidjs-html';
  * The navigation
  * @param {string} currentPage Which page it is to highlight
  * @param {Array} pages An array of strings with the pages it should render
- * @returns {string}
+ * @returns {string} html string
  */
 export default function navigaiton(currentPage, pages) {
     return html`

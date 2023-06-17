@@ -1,24 +1,29 @@
-import { createResource, createSignal, Show, createEffect } from 'solidjs';
+import { Show, createResource, createSignal, createEffect } from 'solidjs';
 import html from 'solidjs-html';
 import CopyButton from './copyButton.js';
 
 const types = {
-    js: 'Javascript',
-    html: 'Html',
-    css: 'Css',
+    js: 'javascript',
+    html: 'html',
+    css: 'css',
 };
 
 /**
  * Renders a block of code
- * @param {object} data
+ * @param {Object} data Object of data
+ * @param {string} data.path url to the code
  * @returns {Promise<string>} html string
  */
 export default function codeBlock({ path }) {
     const [url, setUrl] = createSignal('');
     const [type, setType] = createSignal(() => getType(path));
+    const [className, setClassName] = createSignal('language-js');
     const [code] = createResource(url, fetchCode);
 
-    const parser = new DOMParser();
+    createEffect(() => {
+        const newClassName = 'language-' + getType(path);
+        setClassName(newClassName);
+    });
 
     return html`
         <details class="codeBlock" onclick=${() => setUrl(path)}>
@@ -29,13 +34,8 @@ export default function codeBlock({ path }) {
             >
                 ${CopyButton(() => code())}
                 <pre>
-					<code>
-						${() =>
-                    code() &&
-                    parser.parseFromString(
-                        hljs.highlightAuto(code()).value,
-                        'text/html',
-                    ).body}
+					<code class=${className()}>
+						${() => code()}
 					</code>
 				</pre>
             <//>
