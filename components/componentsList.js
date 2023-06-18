@@ -13,12 +13,10 @@ export default function componentsList(url) {
         <${For} each=${() => components()}>
             ${(file) => {
                 return html`
-                    <article>
-                        <details class="codeBlock">
-                            <summary>${file.name.split('.')[0]}</summary>
-                            <md-block src=${file.path}></md-block>
-                        </details>
-                    </article>
+                    <details class="codeBlock">
+                        <summary>${file.name.split('.')[0]}</summary>
+                        <md-block src=${file.path}></md-block>
+                    </details>
                 `;
             }}
         <//>
