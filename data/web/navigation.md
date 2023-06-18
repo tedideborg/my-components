@@ -1,10 +1,6 @@
-# Navigation
-
 An accesible and modern navigation using vanilla javascript, css and html
 
-## Code
-
-### Javascript
+#### Javascript
 
 ```javascript
 const primaryHeader = document.getElementById('primary-header');
@@ -38,7 +34,7 @@ const toggleNav = (open = true) => {
 };
 ```
 
-### HTML
+#### HTML
 
 ```HTML
 <header class="primary-header" id="primary-header">
@@ -78,7 +74,7 @@ const toggleNav = (open = true) => {
 </header>
 ```
 
-### CSS
+#### CSS
 
 ```CSS
 .primary-header {

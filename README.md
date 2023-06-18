@@ -19,7 +19,3 @@ All that and more without any build step or huge node_modules folder
 ## Usage
 
 Simply fire it up locally with a server, I use VS Code Live Server, and you are good to go.
-
-```javascript
-console.log('hej');
-```

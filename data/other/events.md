@@ -1,3 +1,8 @@
+A minimal event handler
+
+#### Javascript
+
+```javascript
 export const events = {
     events: {},
     on: function (eventName, fn) {
@@ -22,3 +27,4 @@ export const events = {
         }
     },
 };
+```

@@ -1,6 +1,5 @@
-import { createResource, For } from 'solidjs';
+import { createResource, For, onMount } from 'solidjs';
 import html from 'solidjs-html';
-import codeList from './codeList.js';
 
 /**
  * Renders out a list of the sub-folders of a specific folder on github
@@ -12,11 +11,13 @@ export default function componentsList(url) {
 
     return html`
         <${For} each=${() => components()}>
-            ${(dir) => {
+            ${(file) => {
                 return html`
                     <article>
-                        <h4>${dir.name}</h4>
-                        ${codeList(`${url}/${dir.name}/`)}
+                        <details class="codeBlock">
+                            <summary>${file.name.split('.')[0]}</summary>
+                            <md-block src=${file.path}></md-block>
+                        </details>
                     </article>
                 `;
             }}
@@ -27,10 +28,10 @@ export default function componentsList(url) {
 async function getComponents(url) {
     const res = await fetch(url + '/');
     const data = await res.json();
-    const dirs = data.filter((item) => {
-        if (item.type === 'dir') {
+    const files = data.filter((item) => {
+        if (item.type === 'file') {
             return item;
         }
     });
-    return dirs;
+    return files;
 }
