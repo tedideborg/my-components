@@ -4,7 +4,7 @@ A random collections of nice, reusable components and code snippets I've found t
 
 ## About this site
 
-This site is mostly an experiment for not using any build tools (no webpack, npm or anything like that) but still get the benefits from modern web develpment. I've used [SolidJs](https://https://www.solidjs.com), [Navigo](https://github.com/krasimir/navigo), [md-block](https://md-block.verou.me), highlightJs and Pico css to build it. It's small, it's fast and it's extremely easy to get up and running with it. Some of it's features:
+This site is mostly an experiment for not using any build tools (no webpack, npm or anything like that) but still get the benefits from modern web develpment. I've used [SolidJs](https://https://www.solidjs.com), [Navigo](https://github.com/krasimir/navigo), [md-block](https://md-block.verou.me), [PrismJs](https://prismjs.com) and [PicoCss](https://picocss.com) to build it. It's small, it's fast and it's extremely easy to get up and running with it. Some of it's features:
 
 -   ♻️ Re-usable components
 -   📦 States
@@ -18,4 +18,4 @@ All that and more without any build step or huge node_modules folder
 
 ## Usage
 
-Simply fire it up locally with a server, I use VS Code Live Server, and you are good to go.
+Simply fire up the index.html file locally with a server, I use VS Code Live Server, and you are good to go.

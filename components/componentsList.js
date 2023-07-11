@@ -1,5 +1,6 @@
 import { createResource, For, onMount } from 'solidjs';
 import html from 'solidjs-html';
+import copyButton from './copyButton.js';
 
 /**
  * Renders out a list of the sub-folders of a specific folder on github
@@ -8,6 +9,18 @@ import html from 'solidjs-html';
  */
 export default function componentsList(url) {
     const [components] = createResource(() => getComponents(url));
+    onMount(() => {
+        setTimeout(() => {
+            let codeList = Array.from(document.getElementsByTagName('pre'));
+            codeList.forEach((div) => {
+                div.setAttribute('data-src', './prismjs/prism.js');
+                div.getElementsByTagName('code')[0].setAttribute(
+                    'data-prismjs-copy',
+                    'copy',
+                );
+            });
+        }, 1000);
+    });
 
     return html`
         <${For} each=${() => components()}>
