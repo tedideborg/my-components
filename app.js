@@ -59,7 +59,7 @@ async function setupNavigation() {
 }
 
 function initialiseRouter() {
-    const router = new Navigo('/', {
+    const router = new Navigo('/my-components', {
         hash: true,
     });
     router
