@@ -19,10 +19,8 @@ const [page, setPage] = createSignal('home');
 function App() {
     const [pages] = createResource(setupNavigation);
 
-    createEffect(() => {
-        if (pages.loading) return;
-        initialiseRouter();
-    }, [pages]);
+    window.addEventListener('hashchange', handleLocaiton);
+    handleLocaiton();
 
     return html`
         <header>
@@ -58,16 +56,10 @@ async function setupNavigation() {
     return dirs;
 }
 
-function initialiseRouter() {
-    const router = new Navigo('/my-components', {
-        hash: true,
-    });
-    router
-        .on('/', () => {
-            setPage('home');
-        })
-        .on('/:page', ({ data }) => {
-            setPage(data.page);
-        })
-        .resolve();
+async function handleLocaiton() {
+    let location = window.location.hash.replace('#', '');
+    if (location.length == 0) {
+        location = '/';
+    }
+    setPage(location);
 }

@@ -14,7 +14,7 @@ export default function navigaiton(currentPage, pages) {
                 <li>
                     <a
                         class=${currentPage === 'home' ? 'active' : ''}
-                        href="/"
+                        href="#home"
                         data-navigo
                         >Home</a
                     >
@@ -27,7 +27,7 @@ export default function navigaiton(currentPage, pages) {
                                     class=${currentPage === page
                                         ? 'active'
                                         : ''}
-                                    href=${page}
+                                    href=${'#' + page}
                                     data-navigo
                                     >${page}</a
                                 >
