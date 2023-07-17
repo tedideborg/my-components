@@ -1,4 +1,4 @@
-import { For, onMount } from 'solidjs';
+import { For } from 'solidjs';
 import html from 'solidjs-html';
 
 /**

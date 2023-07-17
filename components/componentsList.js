@@ -1,6 +1,6 @@
-import { createResource, For, onMount } from 'solidjs';
+import { For, Suspense, createResource, onMount } from 'solidjs';
 import html from 'solidjs-html';
-import copyButton from './copyButton.js';
+import { getDataFromGithub } from '../app.js';
 
 /**
  * Renders out a list of the sub-folders of a specific folder on github
@@ -23,26 +23,26 @@ export default function componentsList(url) {
     });
 
     return html`
-        <${For} each=${() => components()}>
-            ${(file) => {
-                return html`
-                    <details class="codeBlock">
-                        <summary>${file.name.split('.')[0]}</summary>
-                        <md-block src=${file.path}></md-block>
-                    </details>
-                `;
-            }}
+        ${() =>
+            components.error &&
+            html`<div class="alert-danger" role="alert">
+                Too many fetch requests to github. Come back in an hour
+            </div>`}
+        <${Suspense} fallback=${html`<section aria-busy="true"></section>`}>
+            <${For} each=${() => components()}>
+                ${(file) => {
+                    return html`
+                        <details class="codeBlock">
+                            <summary>${file.name.split('.')[0]}</summary>
+                            <md-block src=${file.path}></md-block>
+                        </details>
+                    `;
+                }}
+            <//>
         <//>
     `;
 }
 
 async function getComponents(url) {
-    const res = await fetch(url + '/');
-    const data = await res.json();
-    const files = data.filter((item) => {
-        if (item.type === 'file') {
-            return item;
-        }
-    });
-    return files;
+    return getDataFromGithub(url, 'files');
 }

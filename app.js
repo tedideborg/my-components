@@ -35,6 +35,11 @@ function App() {
         ${() => navigation(page(), pages)}
         <main>
             <${Switch}>
+                <${Match} when=${() => pages.error}>
+                    ${html`<div class="alert-danger" role="alert">
+                        Too many fetch requests to github. Come back in an hour
+                    </div>`}
+                <//>
                 <${Match} when=${() => page() === 'home'}> ${homePage()} <//>
                 <${Match} when=${() => page() !== 'home'}>
                     ${() => codePage(page())}
@@ -48,12 +53,7 @@ function App() {
 render(App, document.getElementById('app'));
 
 async function setupNavigation() {
-    let res = await fetch(rootUrl);
-    let data = await res.json();
-    let dirs = data
-        .filter((item) => item.type === 'dir')
-        .map((item) => item.name);
-    return dirs;
+    return getDataFromGithub(rootUrl, 'dirs');
 }
 
 async function handleLocaiton() {
@@ -62,4 +62,23 @@ async function handleLocaiton() {
         location = '/';
     }
     setPage(location);
+}
+
+export async function getDataFromGithub(url, type) {
+    const res = await fetch(url);
+    if (res.status === 403) throw new Error('Too many requests to github');
+    const data = await res.json();
+    let items = [];
+    if (type === 'dirs') {
+        items = data
+            .filter((item) => item.type === 'dir')
+            .map((item) => item.name);
+    } else if (type === 'files') {
+        items = data.filter((item) => {
+            if (item.type === 'file') {
+                return item;
+            }
+        });
+    }
+    return items;
 }

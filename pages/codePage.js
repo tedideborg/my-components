@@ -1,6 +1,6 @@
 import html from 'solidjs-html';
-import componentsList from '../components/componentsList.js';
 import { rootUrl } from '../app.js';
+import componentsList from '../components/componentsList.js';
 
 /**
  * The page that contains all the code
