@@ -59,7 +59,7 @@ async function setupNavigation() {
 async function handleLocaiton() {
     let location = window.location.hash.replace('#', '');
     if (location.length == 0) {
-        location = '/';
+        location = 'home';
     }
     setPage(location);
 }
