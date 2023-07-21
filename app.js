@@ -23,15 +23,6 @@ function App() {
     handleLocaiton();
 
     return html`
-        <header>
-            <hgroup>
-                <h1>My components</h1>
-                <h2>
-                    A collection of my components I've built throughout the
-                    years
-                </h2>
-            </hgroup>
-        </header>
         ${() => navigation(page(), pages)}
         <main>
             <${Switch}>
@@ -46,7 +37,7 @@ function App() {
                 <//>
             <//>
         </main>
-        <footer>Made with Love by Ted</footer>
+        <footer>Made with ❤️ by Ted</footer>
     `;
 }
 
@@ -64,6 +55,12 @@ async function handleLocaiton() {
     setPage(location);
 }
 
+/**
+ * Gets data from github and looks out for 403 errors
+ * @param {string} url The url it should fetch from Github
+ * @param {string} type What type, dir or file
+ * @returns {Promise<Array>} An array of items, either dirs or files
+ */
 export async function getDataFromGithub(url, type) {
     const res = await fetch(url);
     if (res.status === 403) throw new Error('Too many requests to github');

@@ -11,6 +11,9 @@ export default function navigaiton(currentPage, pages) {
     return html`
         <nav>
             <ul>
+                <li><strong>My components</strong></li>
+            </ul>
+            <ul>
                 <li>
                     <a
                         class=${currentPage === 'home' ? 'active' : ''}
